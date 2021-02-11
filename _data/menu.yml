@@ -1,0 +1,6 @@
+Roulette:
+    roulette_payout: Payout
+    roulette_series: Callbets
+
+Black Jack:
+    blackjack_payout: Payout

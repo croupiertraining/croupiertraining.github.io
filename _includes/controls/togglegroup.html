@@ -1,0 +1,11 @@
+<label for="settings-{{ include.game }}-{{ include.setting }}">{{ include.label }}:</label>
+<div class="toggle-buttons">
+<div class="toggle-buttons-container">
+    {% assign buttons = site.data.toggle[ include.game ] %}
+    {% capture btname %}toggle-{{ include.game }}-{{ include.setting }}{% endcapture %}
+
+    {% for bt in buttons[ include.setting ] %}
+        {% include controls/togglebutton.html name=btname label=bt.label checked=bt.checked %}
+    {% endfor %}
+</div>
+</div>

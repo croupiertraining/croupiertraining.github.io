@@ -1,0 +1,24 @@
+<div id="controls">
+<div id="controls-container">
+    <div id="numpad" class="grid">
+        {% assign keys = "7,8,9,4,5,6,1,2,3" | split: "," %}
+        {% for key in keys %}
+            <button class="numkey" type="button">{{ key }}</button>
+        {% endfor %}
+
+        {% for button in site.data.controls.numpad %}
+            <button id="{{ button.id }}" type="button" class="{{ button.class }}">{{ button.label }}</button>
+        {% endfor %}
+    </div>
+    <div id="numpadcontrols" class="grid">
+        {% for button in site.data.controls.control_answer %}
+            <input id="{{ button.id }}" class="answer preinput {{ button.add_classes }}" type="text" placeholder="{{ button.placeholder }}" readonly="readonly" />
+            <button name="submit" class="{{ button.add_classes }}" type="button">&#8680;</button>
+        {% endfor %}
+
+        {% for button in site.data.controls.control %}
+            <button id="{{ button.id }}" type="button">{{ button.label }}</button>
+        {% endfor %}
+    </div>
+</div>
+</div>

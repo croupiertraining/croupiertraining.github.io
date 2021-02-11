@@ -1,0 +1,35 @@
+---
+layout:
+---
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+{% include head.html %}
+
+<body>
+<div class="container">
+<div class="mainview">
+    {% include modal.html modalName="Menu" src="menu.html" %}
+    {% include modal.html modalName="About" src="modals/about.html" %}
+    {% include modal.html modalName="Shortcuts" src="modals/shortcuts.html" %}
+    {% include modal.html modalName="SettingsPayout" src="modals/settings/payout.html" %}
+    {% include modal.html modalName="SettingsSeries" src="modals/settings/series.html" %}
+    {% include modal.html modalName="SettingsBJ" src="modals/settings/blackjack.html" %}
+    {% include modal.html modalName="Awesome" src="modals/awesome.html" %}
+
+    <div id="mainframe">
+        <div id="tableframe">
+            {% include roulette/layout.svg %}
+        </div>
+
+        {% include game.html gameName="series" src="games/series.html" %}
+        {% include game.html gameName="bj" src="games/blackjack.html" %}
+    </div>
+
+    {% include controls.html %}
+    {% include icons.html %}
+</div>
+</div>
+</body>
+
+</html>

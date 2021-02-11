@@ -1,0 +1,9 @@
+<dl>
+{% for group in site.data.menu %}
+    <dt>{{ group[0] }}</dt>
+
+    {% for game in group[1] %}
+        <dd data-hook="{{ game[0] }}">{{ game[1] }}</dd>
+    {% endfor %}
+{% endfor %}
+</dl>

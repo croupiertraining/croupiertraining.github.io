@@ -1,0 +1,21 @@
+<label for="settings-{{ include.game }}-{{ include.setting }}">{{ include.label }}:</label>
+{% if include.preview  %}
+    <span id="preview-{{ include.game }}-{{ include.setting }}" class="preview">{{ include.preview }}</span>
+{% endif %}
+
+<div class="labeled-slider">
+    {% if include.left %}
+        <span class="left">{{ include.left }}</span>
+    {% endif %}
+
+    <input type="range"
+        min="{{ include.min }}" max="{{ include.max }}" step="{{ include.step }}"
+        value="{{ include.value }}"
+        id="settings-{{ include.game }}-{{ include.setting }}"
+        name="settings-{{ include.game }}"
+    />
+
+    {% if include.right %}
+        <span class="right">{{ include.right }}</span>
+    {% endif %}
+</div>

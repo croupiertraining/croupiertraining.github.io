@@ -1,0 +1,10 @@
+- label: straight-up
+  checked: checked
+- label: split
+  checked: checked
+- label: street
+  checked: checked
+- label: corner
+  checked: checked
+- label: six-line
+  checked: checked

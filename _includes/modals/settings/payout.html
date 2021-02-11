@@ -1,0 +1,31 @@
+<div>
+{% include controls/togglegroup.html game="payout" setting="winningNumbers" label="Winning numbers" %}
+{% include controls/togglegroup.html game="payout" setting="winningBets" label="Winning bets" %}
+
+{% include controls/slider.html game="payout" setting="emptyBetFrequency"
+    label="Empty bet frequency"
+    left="never" right="almost always"
+    min="0" max="1" step="0.1" %}
+
+{% include controls/slider.html game="payout" setting="moreThanOneFrequency"
+    label="More than one chip in a stack frequency"
+    left="never" right="always"
+    min="0" max="1" step="0.1" %}
+
+{% include controls/slider.html game="payout" setting="maxStacks"
+    label="Max number of stacks" preview="12"
+    min="1" max="12" step="1" %}
+
+{% include controls/slider.html game="payout" setting="minPerStack"
+    label="Min chips per stack" preview="1"
+    min="1" max="50" step="1" %}
+
+{% include controls/slider.html game="payout" setting="maxPerStack"
+    label="Max chips per stack" preview="10"
+    min="1" max="50" step="1" %}
+
+{% include controls/slider.html game="payout" setting="maxTotal"
+    label="Max chips total" preview="50"
+    min="1" max="600" step="1" %}
+</div>
+<br />

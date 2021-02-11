@@ -1,0 +1,435 @@
+body {
+    background-color: #040;
+    color: white;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.mainview {
+    margin: auto;
+    position: relative;
+}
+
+#mainframe {
+    display: flex;
+    position: relative;
+}
+
+svg {
+    width: 80vw;
+}
+
+@media screen and (min-width: 1000px) {
+    svg {
+        width: 60vw;
+        max-width: 800px;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.invisible {
+    display: none;
+}
+
+#seriesframe, #bjframe {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient( #090 15%, #040 30%);
+}
+
+#seriesframe-container, #bjframe-container {
+    margin: auto;
+    width: 80%;
+    max-width: 400px;
+}
+
+p.series, p.value {
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 22pt;
+    margin: 0;
+    padding: 5px 15px;
+}
+
+p.series {
+    border: 1px solid black;
+    background: black;
+}
+
+p.series.narrow {
+    font-stretch: ultra-condensed;
+}
+
+p.value {
+    border: 1px solid black;
+    background: red;
+}
+
+#tableframe, #seriesframe, #bjframe, #controls {
+    text-align: center;
+}
+
+#controls {
+    margin-top: 15px;
+    display: flex;
+}
+
+#controls-container {
+    margin: auto;
+}
+
+#controls .grid {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 3px;
+    justify-content: center;
+}
+
+#numpad {
+    float: left;
+    width: 50%;
+    height: 220px;
+}
+
+@media screen and (min-width: 1000px) {
+    #numpad, #numpadcontrols {
+        width: 200px;
+    }
+}
+
+#icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 20pt;
+}
+
+@media screen and (max-width: 400px) {
+    #icons.top {
+        position: fixed;
+        width: 100%;
+        right: unset;
+        margin-right: unset;
+    }
+
+    #icons.top li {
+        display: inline-block;
+        padding: 0 30px;
+    }
+}
+
+#icons a[title="Menu"] {
+    font-size: 24pt;
+}
+
+div.awesome {
+    width: 32px;
+    height: 32px;
+    background: url("../../gfx/awesome-mega-ico.png") no-repeat;
+}
+
+div.awesome:hover {
+    background: url("../../gfx/awesome-mega-ico-rolled-eyes.png") no-repeat;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    padding-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input {
+    border-color: gray;
+    background-color: #0b0;
+    transition-duration: 0.2s;
+}
+
+input.preinput {
+    background-color: #eee;
+}
+
+input.hinted {
+    background-color: #f9d02f;
+}
+
+input.answer {
+    -webkit-appearance: textfield;
+    border-radius: 25%;
+    grid-column: 1 / 3;
+    width: 100%;
+    font-size: 16pt;
+}
+
+input.error {
+    border-color: red;
+    background-color: #f99;
+}
+
+::placeholder {
+    font-size: 14pt;
+    color: gray;
+    opacity: 1;
+}
+
+#controls button {
+    border-color: gray;
+    border-radius: 50%;
+    background-color: gray;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 16pt;
+    text-align: center;
+    padding: 0;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+#submit {
+    background-color: green;
+}
+
+#btC, #btDel, #numpadcontrols button {
+    border-color: darkgray;
+    background-color: darkgray;
+}
+
+button:active {
+    background-color: orange;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+  color: black;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #888;
+    font-family: sans-serif;
+}
+
+@media screen and (min-width: 1000px) {
+    .modal-content {
+        padding: 20px;
+        width: 60%;
+    }
+
+    #modalAwesome .modal-content {
+        width: 30%;
+    }
+}
+
+#modalShortcuts h1 {
+    text-align: center;
+}
+
+#modalShortcuts .modal-content {
+    width: 50%;
+}
+
+#modalShortcuts .grid {
+    display: grid;
+    grid-template-columns: 10% auto;
+}
+
+.grid span {
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: auto;
+    padding: 5px 5px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+#modalAwesome .modal-content {
+    text-align: center;
+    background-color: white;
+    animation-name: awesome;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes awesome {
+    from { background-color: white; }
+    to { background-color: black; }
+}
+
+.close {
+    color: #aaa;
+    right: 0;
+    position: absolute;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 22pt;
+    font-weight: bold;
+}
+
+@media screen and (max-height: 500px) {
+    .close {
+        position: fixed;
+    }
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+p.salutation, p.goodluck {
+    font-size: large;
+    font-weight: bold;
+}
+
+p.goodluck {
+    text-align: center;
+}
+
+.diagram {
+    display: flex;
+    justify-content: center;
+}
+
+#modalMenu {
+    font-family: sans-serif;
+}
+
+#modalMenu .modal-content {
+    color: white;
+    padding: 0;
+}
+
+#modalMenu dl {
+    margin: 0;
+}
+
+#modalMenu dt {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    border: 1px solid white;
+    background: red;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+#modalMenu dd {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    margin: 0;
+    border: 1px solid white;
+    background: black;
+}
+
+#modalMenu dd:hover {
+    background: gray;
+    cursor: pointer;
+}
+
+#modalSettingsPayout label, #modalSettingsSeries label, #modalSettingsBJ label {
+    padding-left: 5px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.labeled-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+
+.labeled-slider .left, .labeled-slider .right {
+    width: 12%;
+    font-size: 10pt;
+}
+
+.labeled-slider .left {
+    text-align: right;
+}
+
+.labeled-slider input {
+    width: 70%;
+    margin: 0 9px;
+}
+
+.preview {
+    color: #666;
+    padding-left: 10px;
+}
+
+div.toggle-buttons {
+    display: flex;
+}
+
+div.toggle-buttons-container {
+    display: flex;
+    margin: auto;
+}
+
+#modalSettingsPayout label.toggle,
+#modalSettingsSeries label.toggle {
+    display: inline-block;
+    padding: 3px 10px;
+    margin: 0 2px;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: gray;
+    color: white;
+    text-transform: capitalize;
+    text-align: center;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+#modalSettingsPayout label.toggle.checked,
+#modalSettingsSeries label.toggle.checked {
+    border-width: 2px;
+    background-color: orange;
+    color: black;
+}
+
+input[type="checkbox"] {
+    display: none;
+}

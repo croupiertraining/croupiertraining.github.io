@@ -1,0 +1,7 @@
+<h1>Keyboard shortcuts</h1>
+<div class="grid">
+    {% for key in site.data.shortcuts %}
+        <span>{{ key[0] }}</span><p>{{ key[1] }}</p>
+    {% endfor %}
+</div>
+<p>While in the "Answer" input, you can use "Up" and "Down" arrows to increase or decrease the value by 1.</p>

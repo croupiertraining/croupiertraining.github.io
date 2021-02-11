@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 5 125 101" preserveAspectRatio="xMidYMid slice">
+    <defs>
+        <radialGradient id="tableGradient">
+            <stop offset="0%" stop-color="#090"/>
+            <stop offset="100%" stop-color="#040"/>
+        </radialGradient>
+        <radialGradient id="chipGradient">
+            <stop offset="0%" stop-color="yellow"/>
+            <stop offset="60%" stop-color="yellow"/>
+            <stop offset="85%" stop-color="orange"/>
+            <stop offset="95%" stop-color="#d35400"/>
+            <stop offset="100%" stop-color="brown"/>
+        </radialGradient>
+
+        <radialGradient id="winning0Gradient">
+            <stop offset="0%" stop-color="#090"/>
+            <stop offset="100%" stop-color="#040"/>
+        </radialGradient>
+
+        <radialGradient id="winning1Gradient">
+            <stop offset="0%" stop-color="#f00"/>
+            <stop offset="60%" stop-color="#d00"/>
+            <stop offset="100%" stop-color="#900"/>
+        </radialGradient>
+        <radialGradient id="winning3Gradient">
+            <stop offset="0%" stop-color="#f00"/>
+            <stop offset="60%" stop-color="#d00"/>
+            <stop offset="100%" stop-color="#900"/>
+        </radialGradient>
+        <radialGradient id="winning5Gradient">
+            <stop offset="0%" stop-color="#f00"/>
+            <stop offset="60%" stop-color="#d00"/>
+            <stop offset="100%" stop-color="#900"/>
+        </radialGradient>
+
+        <radialGradient id="winning2Gradient">
+            <stop offset="0%" stop-color="#555"/>
+            <stop offset="60%" stop-color="#333"/>
+            <stop offset="100%" stop-color="#000"/>
+        </radialGradient>
+        <radialGradient id="winning4Gradient">
+            <stop offset="0%" stop-color="#555"/>
+            <stop offset="60%" stop-color="#333"/>
+            <stop offset="100%" stop-color="#000"/>
+        </radialGradient>
+        <radialGradient id="winning6Gradient">
+            <stop offset="0%" stop-color="#555"/>
+            <stop offset="60%" stop-color="#333"/>
+            <stop offset="100%" stop-color="#000"/>
+        </radialGradient>
+    </defs>
+
+    <rect fill="url(#tableGradient)" width="100%" height="100%" />
+    <g>
+        <g>
+            <rect x="30"  y="12" stroke="white" fill="#b00" width="25" height="31" id="number3frame" />
+            <rect x="55"  y="12" stroke="white" fill="#000" width="25" height="31" id="number6frame" />
+            <rect x="80" y="12" stroke="white" fill="#b00" width="25" height="31" id="number9frame" />
+            <rect x="30"  y="43" stroke="white" fill="#000" width="25" height="31" id="number2frame" />
+            <rect x="55"  y="43" stroke="white" fill="#b00" width="25" height="31" id="number5frame" />
+            <rect x="80" y="43" stroke="white" fill="#000" width="25" height="31" id="number8frame" />
+            <rect x="30"  y="74" stroke="white" fill="#b00" width="25" height="31" id="number1frame" />
+            <rect x="55"  y="74" stroke="white" fill="#000" width="25" height="31" id="number4frame" />
+            <rect x="80" y="74" stroke="white" fill="#b00" width="25" height="31" id="number7frame" />
+        </g>
+        <g>
+            <polygon id="zeroFrame" points="30,12 30,105 10,105 5,59.5 10,12" stroke="white" fill="none" />
+        </g>
+        <g fill="#fff" font-family="'Verdana'" font-size="14">
+            <text x="28"    y="63"   text-anchor="middle"><tspan rotate="-90">0</tspan></text>
+            <text x="52.5"  y="31.5" text-anchor="middle"><tspan rotate="-90">3</tspan></text>
+            <text x="77.5"  y="31.5" text-anchor="middle"><tspan rotate="-90">6</tspan></text>
+            <text x="102.5" y="31.5" text-anchor="middle"><tspan rotate="-90">9</tspan></text>
+            <text x="52.5"  y="63"   text-anchor="middle"><tspan rotate="-90">2</tspan></text>
+            <text x="77.5"  y="63"   text-anchor="middle"><tspan rotate="-90">5</tspan></text>
+            <text x="102.5" y="63"   text-anchor="middle"><tspan rotate="-90">8</tspan></text>
+            <text x="52.5"  y="93.5" text-anchor="middle"><tspan rotate="-90">1</tspan></text>
+            <text x="77.5"  y="93.5" text-anchor="middle"><tspan rotate="-90">4</tspan></text>
+            <text x="102.5" y="93.5" text-anchor="middle"><tspan rotate="-90">7</tspan></text>
+        </g>
+        <g fill="brown" font-family="Arial" font-size="8" id="chips" />
+    </g>
+</svg>

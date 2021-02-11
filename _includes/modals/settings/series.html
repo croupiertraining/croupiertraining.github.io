@@ -1,0 +1,19 @@
+<div>
+{% include controls/togglegroup.html game="series" setting="selectedSeries" label="Selected series" %}
+
+{% include controls/slider.html game="series" setting="minBet"
+    label="Min cash" preview="series minimum"
+    left="series minimum" right="10&nbsp;000"
+    min="-1" max="28" step="1" value="-1" %}
+
+{% include controls/slider.html game="series" setting="maxBet"
+    label="Max cash" preview="500"
+    left="50" right="10&nbsp;000"
+    min="0" max="28" step="1" value="5" %}
+
+{% include controls/slider.html game="series" setting="step"
+    label="Step" preview="10"
+    left="5" right="1&nbsp;000"
+    min="0" max="7" step="1" value="1" %}
+</div>
+<br />

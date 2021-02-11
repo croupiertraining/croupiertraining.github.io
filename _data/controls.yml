@@ -1,0 +1,32 @@
+numpad:
+    - id: btC
+      label: C
+
+      # this id is never used
+    - id: bt0
+      label: 0
+      class: numkey
+
+    - id: btDel
+      label: "&#8592;"
+
+control_answer:
+    - id: answer
+
+    - id: answer2
+      add_classes: invisible control-series
+      placeholder: Total Bet
+
+    - id: answer3
+      add_classes: invisible control-series
+      placeholder: Rest
+
+control:
+    - id: btNPSettings
+      label: "&#x2699;"
+
+    - id: btNPResult
+      label: "?"
+
+    - id: btNPNext
+      label: "&#xbb;"
