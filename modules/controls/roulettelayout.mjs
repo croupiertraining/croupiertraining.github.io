@@ -7,7 +7,7 @@ const betMultiplier = {
 };
 
 async function loadData() {
-    const response = await fetch('/dtg/data/roulette.json');
+    const response = await fetch('/data/roulette.json');
     return await response.json();
 }
 
