@@ -1,4 +1,11 @@
 <label for="settings-{{ include.game }}-{{ include.setting }}">{{ include.label }}:</label>
+<span class="toggle-all">
+    {% capture btname %}toggle-all-{{ include.game }}-{{ include.setting }}{% endcapture %}
+    {% if include.toggle_all %}
+        {% assign checked = "checked" %}
+    {% endif %}
+    {% include controls/togglebutton.html name=btname label="select all" checked=checked %}
+</span>
 <div class="toggle-buttons">
 <div class="toggle-buttons-container">
     {% assign buttons = site.data.toggle[ include.game ] %}

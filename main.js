@@ -1,8 +1,15 @@
 import { GamePane } from "./modules/gamepane.mjs";
 import { ModalList } from "./modules/modallist.mjs";
-import { DynamicRange } from "./modules/controls/dynamicrange.mjs";
+import { Range, DynamicRange } from "./modules/controls/range.mjs";
+import { Radio, ToggleGroup } from "./modules/controls/togglegroup.mjs";
 import { Numpad } from "./modules/numpad.mjs";
 import * as Games from "./modules/games.mjs";
+
+
+async function loadPresets() {
+    const response = await fetch('/data/presets.json');
+    return await response.json();
+}
 
 
 let modals = new ModalList();
@@ -11,8 +18,8 @@ let numpad = new Numpad("answer");
 
 // TODO validate min < max
 let drSeriesMinBet = new DynamicRange({
-    inputID: 'settings-series-minBet',
-    previewID: 'preview-series-minBet',
+    baseParams: [ null, 'series', 'minBet' ],
+    initialValue: 100,
     ranges: [
         {
             type: '==',
@@ -38,6 +45,31 @@ let drSeriesMinBet = new DynamicRange({
             }
         }
     ],
+    reverseRanges: [
+        {
+            type: '==',
+            value: null,
+            returnValue: -1
+        },
+        {
+            type: '==',
+            value: 50,
+            returnValue: 0
+        },
+        {
+            type: '>',
+            value: 2000,
+            returnValue: function(val) {
+                return 20 + (val-2000) / 1000;
+            }
+        },
+        {
+            type: 'default',
+            returnValue: function(val) {
+                return val / 100;
+            }
+        }
+    ],
     // TODO add thousand separator
     labels: [
         {
@@ -56,9 +88,8 @@ let drSeriesMinBet = new DynamicRange({
 
 // TODO validate min < max
 let drSeriesMaxBet = new DynamicRange({
-    inputID: 'settings-series-maxBet',
-    previewID: 'preview-series-maxBet',
-    initialValue: 500,
+    baseParams: [ null, 'series', 'maxBet' ],
+    initialValue: 1000,
     ranges: [
         {
             type: '==',
@@ -78,13 +109,32 @@ let drSeriesMaxBet = new DynamicRange({
                 return val * 100;
             }
         }
-    ]
+    ],
+    reverseRanges: [
+        {
+            type: '==',
+            value: 50,
+            returnValue: 0
+        },
+        {
+            type: '>',
+            value: 2000,
+            returnValue: function(val) {
+                return 20 + (val-2000) / 1000;
+            }
+        },
+        {
+            type: 'default',
+            returnValue: function(val) {
+                return val / 100;
+            }
+        }
+    ],
 });
 
 let drSeriesStep = new DynamicRange({
-    inputID: 'settings-series-step',
-    previewID: 'preview-series-step',
-    initialValue: 10,
+    baseParams: [ null, 'series', 'step' ],
+    initialValue: 100,
     steps: [5, 10, 25, 50, 100, 250, 500, 1000]
 });
 
@@ -93,6 +143,15 @@ let series = new Games.Series({
     maxBet: drSeriesMaxBet,
     step: drSeriesStep
 });
+
+let seriesPreset = document.querySelector('#settings-series-preset');
+
+if ( seriesPreset !== null ) {
+    seriesPreset.onchange = ev => {
+        series.setPreset( ev.target.value );
+    };
+}
+
 
 let bj = new Games.BlackJack();
 let svgTable = new Games.Payout();
@@ -125,35 +184,42 @@ function openSettings() {
 
 function attachEvents() {
     attachSettingsEvents();
-    attachToggleGroupEvents({
+    Radio.attachEventsFor({
+        ref: document.querySelector('#settings-payout-mode-random'),
+        gameRef: svgTable,
+        setting: 'mode',
+        checked: true
+    });
+    Radio.attachEventsFor({
+        ref: document.querySelector('#settings-payout-mode-picture_bets'),
+        gameRef: svgTable,
+        setting: 'mode'
+    });
+    ToggleGroup.attachEventsFor({
         name: 'toggle-series-selectedSeries',
         array: series.selectedSeries,
-        setInitialValue: function( checkbox ) {
-            checkbox.checked = true;
+        buttons: {
+            toggleAll: { checked: true },
+            _default: { checked: true }
         }
     });
-    attachToggleGroupEvents({
+    ToggleGroup.attachEventsFor({
         name: 'toggle-payout-winningNumbers',
         array: svgTable.winningNumbers,
-        setInitialValue: function( checkbox ) {
-            switch (checkbox.labels[0].textContent) {
-                case "0":
-                case "5":
-                    checkbox.checked = true;
-                    break;
-                default:
-                    checkbox.checked = false;
-            }
+        buttons: {
+            0: { checked: true },
+            5: { checked: true }
         },
         parseLabel: function( label ) {
             return Number.parseInt( label );
         }
     });
-    attachToggleGroupEvents({
+    ToggleGroup.attachEventsFor({
         name: 'toggle-payout-winningBets',
         array: svgTable.winningBets,
-        setInitialValue: function( checkbox ) {
-            checkbox.checked = true;
+        buttons: {
+            toggleAll: { checked: true },
+            _default: { checked: true }
         }
     });
     attachMenuHooks();
@@ -171,51 +237,17 @@ function attachSettingsEventsFor( pane, obj ) {
 
     for ( let i = 0; i < settingInputs.length; i++ ) {
         let input = settingInputs[i];
-        let settingName = input.id.substring('settings-'.length + pane.length + '-'.length);
-        let preview = $(`preview-${pane}-${settingName}`);
+        let settingName = input.id.substring(`settings-${pane}-`.length);
 
-        input.value = obj[settingName];
-
-        if ( preview != null ) {
-            input.oninput = function(ev) {
-                preview.textContent = ev.target.value;
-            }
-        }
-
-        input.onchange = function(ev) {
-            obj[settingName] = Number.parseFloat( ev.target.value );
-        }
+        obj.settings[ settingName ] = new Range( obj, pane, settingName );
     }
-}
 
-function attachToggleGroupEvents( params ) {
-    let checkboxes = document.getElementsByName( params.name );
+    let preset = document.querySelector(`#settings-${pane}-preset`);
 
-    for ( let i = 0; i < checkboxes.length; i++ ) {
-        let checkbox = checkboxes[i];
-
-        // revert after page soft reload
-        if ( params.hasOwnProperty('setInitialValue') ) {
-            params.setInitialValue( checkbox );
-        }
-
-        checkbox.onchange = function( ev ) {
-            let s = ev.target.labels[0].textContent;
-
-            if ( params.hasOwnProperty('parseLabel') ) {
-                s = params.parseLabel( s );
-            }
-
-            if ( ev.target.checked ) {
-                params.array.push( s );
-                ev.target.parentNode.classList.add("checked");
-            }
-            else {
-                let i = params.array.indexOf( s );
-                params.array.splice( i, 1 );
-                ev.target.parentNode.classList.remove("checked");
-            }
-        }
+    if ( preset !== null ) {
+        preset.onchange = ev => {
+            obj.setPreset( ev.target.value );
+        };
     }
 }
 
@@ -355,3 +387,12 @@ svgTable.doc = document;
 svgTable.reset();
 
 attachEvents();
+loadPresets().then( data => {
+    for ( const [gameName, presets] of Object.entries(data) ) {
+        let game = games[ gameName ];
+
+        if ( game ) {
+            game.presets = presets;
+        }
+    }
+} );

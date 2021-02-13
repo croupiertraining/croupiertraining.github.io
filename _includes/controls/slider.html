@@ -4,18 +4,26 @@
 {% endif %}
 
 <div class="labeled-slider">
+    {% assign right = include.right %}
+
     {% if include.left %}
-        <span class="left">{{ include.left }}</span>
+        {% assign left = include.left %}
+    {% else %}
+        {% assign left = include.min %}
     {% endif %}
 
+    {% if include.right %}
+        {% assign right = include.right %}
+    {% else %}
+        {% assign right = include.max %}
+    {% endif %}
+
+    <span class="left">{{ left }}</span>
     <input type="range"
         min="{{ include.min }}" max="{{ include.max }}" step="{{ include.step }}"
         value="{{ include.value }}"
         id="settings-{{ include.game }}-{{ include.setting }}"
         name="settings-{{ include.game }}"
     />
-
-    {% if include.right %}
-        <span class="right">{{ include.right }}</span>
-    {% endif %}
+    <span class="right">{{ right }}</span>
 </div>

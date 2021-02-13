@@ -1,0 +1,31 @@
+ungrouped:
+    - label: Easy
+      value: easy
+
+    - label: Medium
+      value: medium
+      selected: selected
+
+    - label: Hard
+      value: hard
+
+groups:
+    Rudiments:
+        - label: Single stack, single count
+          value: rudiment1
+
+        - label: Single stack, 1-10 count
+          value: rudiment2
+
+        - label: Single stack, 10-20 count
+          value: rudiment3
+
+        - label: 2 stacks, 1-15 count
+          value: rudiment4
+
+        - label: 3 stacks, 1-10 count
+          value: rudiment5
+
+    Other:
+        - label: Flat
+          value: flat

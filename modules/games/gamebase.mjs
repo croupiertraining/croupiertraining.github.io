@@ -12,6 +12,10 @@ class Game {
                 this[key] = val;
             }
         }
+
+        // this will hold Setting refs
+        this.settings = {};
+        this.presets = [];
     }
 
     $(id, doc) {
@@ -25,6 +29,17 @@ class Game {
 
     redraw() {
         this.ctx.numpad.reset();
+    }
+
+    setPreset( presetName ) {
+        let preset = this.presets[ presetName ];
+
+        if ( preset ) {
+            for ( const [setting, value] of Object.entries(preset) ) {
+                this.settings[ setting ].value = value;
+                this[ setting ] = value;
+            }
+        }
     }
 
     getRandomSteps() {

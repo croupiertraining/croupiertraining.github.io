@@ -31,12 +31,18 @@ class Series extends Game {
             }
         }, params);
 
+        this.settings = {
+            minBet: this._minBet,
+            maxBet: this._maxBet,
+            step: this._step
+        };
         this.controls = document.getElementsByClassName("control-series");
     }
 
     set minBet( dynamicRange ) {
-        // this could (should?) also work for ints
-        this._minBet = dynamicRange;
+        if ( dynamicRange !== null && typeof dynamicRange == 'object' ) {
+            this._minBet = dynamicRange;
+        }
     }
 
     get minBet() {
@@ -46,8 +52,9 @@ class Series extends Game {
     }
 
     set maxBet( dynamicRange ) {
-        // this could (should?) also work for ints
-        this._maxBet = dynamicRange;
+        if ( dynamicRange !== null && typeof dynamicRange == 'object' ) {
+            this._maxBet = dynamicRange;
+        }
     }
 
     get maxBet() {
@@ -55,8 +62,9 @@ class Series extends Game {
     }
 
     set step( dynamicRange ) {
-        // this could (should?) also work for ints
-        this._step = dynamicRange;
+        if ( dynamicRange !== null && typeof dynamicRange == 'object' ) {
+            this._step = dynamicRange;
+        }
     }
 
     get step() {

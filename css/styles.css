@@ -211,12 +211,29 @@ input.error {
     background-color: green;
 }
 
-#btC, #btDel, #numpadcontrols button {
+#controls #btC,
+#controls #btDel,
+#controls #numpadcontrols button
+{
     border-color: darkgray;
     background-color: darkgray;
 }
 
-button:active {
+@media (hover: hover) {
+    #controls button:hover,
+    #controls #btC:hover,
+    #controls #btDel:hover,
+    #controls #numpadcontrols button:hover
+    {
+        background-color: lightgray;
+    }
+}
+
+#controls button:active,
+#controls #btC:active,
+#controls #btDel:active,
+#controls #numpadcontrols button:active
+{
     background-color: orange;
 }
 
@@ -391,11 +408,35 @@ p.goodluck {
 
 .labeled-slider input {
     width: 70%;
-    margin: 0 9px;
+    margin: 2px 9px;
+    margin-top: 5px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: lightgray;
+    height: 15px;
+}
+
+.labeled-slider input::-moz-range-thumb {
+    -moz-appearance: none;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: white;
+}
+
+.labeled-slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: white;
 }
 
 .preview {
-    color: #666;
+    color: maroon;
     padding-left: 10px;
 }
 
@@ -430,6 +471,21 @@ div.toggle-buttons-container {
     color: black;
 }
 
-input[type="checkbox"] {
+#modalSettingsPayout .toggle-all label,
+#modalSettingsPayout .toggle-all label.checked,
+#modalSettingsSeries .toggle-all label,
+#modalSettingsSeries .toggle-all label.checked
+{
+    margin-bottom: 5px;
+    padding: 3px 20px;
+    border-width: 1px;
+    font-size: 10pt;
+    color: black;
+    background-color: #83eeee;
+}
+
+input[type="checkbox"],
+input[type="radio"]
+{
     display: none;
 }

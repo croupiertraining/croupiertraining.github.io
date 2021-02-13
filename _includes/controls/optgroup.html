@@ -1,0 +1,7 @@
+{% for opt in include.options %}
+    {% assign selected = "" %}
+    {% if opt.selected == "selected" %}
+        {% assign selected = 'selected="selected"' %}
+    {% endif %}
+    <option value="{{ opt.value }}" {{ selected }}>{{ opt.label }}</option>
+{% endfor %}

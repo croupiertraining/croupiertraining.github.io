@@ -1,0 +1,16 @@
+<label for="{{ include.id }}">Preset:</label>
+<select id="{{ include.id }}">
+    <option value="" disabled="disabled">Custom</option>
+
+    {% assign presets = site.data.presets[ include.game ] %}
+
+    {% include controls/optgroup.html options=presets.ungrouped %}
+
+    {% for group in presets.groups %}
+        <optgroup label="{{ group[0] }}">
+            {% assign opts = group[1] %}
+            {% include controls/optgroup.html options=opts %}
+        </optgroup>
+    {% endfor %}
+</select>
+<br />

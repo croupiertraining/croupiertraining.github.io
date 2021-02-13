@@ -1,9 +1,48 @@
+import * as Random from '../random.mjs';
+
 const betMultiplier = {
     'straight-up': 35,
     'split': 17,
     'street': 11,
     'corner': 8,
     'six-line': 5
+};
+
+const stacksPerPictureBet = {
+    deck: 2,
+    deck_moved: 2,
+    mickey_mouse: 3,
+    cross: 5,
+    dinner_for_two: 3,
+    corner_pocket: 2,
+    pb13: 2,
+    pb19: 2,
+    pb33: 3,
+    pb42: 3,
+    pb54: 6,
+    jesus: 3,
+    double_jesus: 6,
+    pb60: 3,
+    x_pattern: 5,
+    pb68: 4,
+    pb77: 4,
+    t_pattern: 4,
+    pb88: 8,
+    pb90: 6,
+    pb100: 8,
+    pb101: 7,
+    pb102: 6,
+    pb123: 9,
+    pb135: 9,
+    pb156: 12,
+    pb73: 5,
+    pb81: 6,
+    pb99: 6,
+    pb116: 7,
+    pb129: 9,
+    pb130: 11,
+    pb141: 9,
+    pb165: 12
 };
 
 async function loadData() {
@@ -31,6 +70,20 @@ class Bets {
         );
 
         return coords.filter( this.byType, this );
+    }
+
+    getPictureBetsFor( winningNumber, maxStacks ) {
+        let number = this.tables.numbers[ winningNumber ];
+        let pictureBetsForNumber = this.tables.picture_bets[ winningNumber ];
+        // TODO filter by type
+        let availablePictureBetsTypes = Object.keys( pictureBetsForNumber ).filter( bet => {
+            return stacksPerPictureBet[ bet ] <= maxStacks;
+        } );
+        let betName = Random.elem( availablePictureBetsTypes );
+        let pictureBets = pictureBetsForNumber[ betName ];
+        let transposition = Random.elem( pictureBets || [] );
+
+        return this._iterateMatrix( transposition, number.offset );
     }
 
     getMultiplier( coords ) {
@@ -124,13 +177,16 @@ class Chip {
 
 
 class RouletteLayout {
-    constructor() {
+    constructor( onLoad ) {
         this.chips = document.querySelector('#chips');
         this.bets = new Bets();
 
         this.bets.load( data => {
             this.bets.tables = data;
+            onLoad();
         } );
+
+        this.reset();
     }
 
     getAvailableBets( winningNumber, types ) {
@@ -138,16 +194,32 @@ class RouletteLayout {
             types.map( elem => betMultiplier[ elem ]) );
     }
 
-    clearTable() {
+    getAvailablePictureBets( winningNumber, maxStacks ) {
+        return this.bets.getPictureBetsFor( winningNumber, maxStacks );
+    }
+
+    reset() {
+        this.payout = 0;
+        this.totalChipsCount = 0;
+        this.totalStacksCount = 0;
+    }
+
+    clear() {
+        this.reset();
+
         let chips = document.querySelector('#chips');
         while (chips.firstChild) {
             chips.removeChild( chips.firstChild );
         }
     }
 
-    addChip( coords, count ) {
-        let chip = new Chip(coords, count);
+    addStack( coords, count ) {
+        let chip = new Chip( coords, count );
         this.chips.append( ...chip.toSvgElems() );
+
+        this.payout += count * this.bets.getMultiplier( coords );
+        this.totalChipsCount += count;
+        this.totalStacksCount++;
     }
 
     highlightWinningNumber( newNum, prevNum ) {

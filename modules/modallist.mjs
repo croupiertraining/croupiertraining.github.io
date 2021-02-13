@@ -45,7 +45,10 @@ class ModalList {
             if ( ev.target.classList.contains("modal") ) {
                 that.hideCurrent();
             }
-            document.activeElement.blur();
+
+            if ( ev.target.nodeName != 'SELECT' ) {
+                document.activeElement.blur();
+            }
         });
     }
 

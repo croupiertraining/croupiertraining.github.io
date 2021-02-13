@@ -1,0 +1,21 @@
+ungrouped:
+    - label: Easy
+      value: easy
+
+    - label: Medium
+      value: medium
+      selected: selected
+
+    - label: Hard
+      value: hard
+
+groups:
+    Hundreds:
+        - label: 1st hundred
+          value: hundred1
+
+        - label: 2nd hundred
+          value: hundred2
+
+        - label: 3rd hundred
+          value: hundred3

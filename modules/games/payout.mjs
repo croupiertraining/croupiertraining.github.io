@@ -17,9 +17,7 @@ class Payout extends Game {
         super({
             paneName: 'tableframe',
             settingsPaneName: 'SettingsPayout',
-            payout: 0,
-            totalChipsCount: 0,
-            totalStacksCount: 0,
+            mode: 'random',
             matrix: null,
             winningNumber: null,
             winningNumbers: [ 0, 5 ],
@@ -34,7 +32,7 @@ class Payout extends Game {
             maxTotal: 10,
         });
 
-        this.layout = new RouletteLayout();
+        this.layout = new RouletteLayout( () => this.refresh() );
     }
 
     $(id, doc) {
@@ -48,39 +46,43 @@ class Payout extends Game {
     }
 
     next() {
-        this.payout = 0;
-        this.totalStacksCount = 0;
-        this.totalChipsCount = 0;
-
+        this.layout.clear();
         this.prevWinningNumber = this.winningNumber;
         this.winningNumber = Random.elem( this.winningNumbers );
 
-        this.matrix = this.layout.getAvailableBets( this.winningNumber, this.winningBets );
+        if ( this.mode == 'picture_bets' ) {
+            this.matrix = this.layout.getAvailablePictureBets( this.winningNumber, this.maxStacks );
+
+            let indices = Array.from( Array(this.matrix.length).keys() );
+            indices.forEach( this.addChips, this );
+        }
+        else {
+            this.matrix = this.layout.getAvailableBets( this.winningNumber, this.winningBets );
+            this.generateRandomBets();
+        }
     }
 
     redraw() {
         super.redraw();
-        this.layout.clearTable();
+
         this.layout.highlightWinningNumber( this.winningNumber, this.prevWinningNumber );
-        this.generateBets();
     }
 
     checkAnswerCondition( answer ) {
-        return Number.parseFloat(answer) == this.payout;
+        return Number.parseFloat(answer) == this.layout.payout;
     }
 
     setResult() {
-        this.ctx.numpad.target.value = this.payout;
+        this.ctx.numpad.target.value = this.layout.payout;
     }
 
-    generateBets() {
-        let randomIndices = Random.shuffle(
-            Array.from( Array(this.matrix.length).keys() )
-        );
-        randomIndices.forEach( this.addRandomChips, this );
+    generateRandomBets() {
+        let indices = Array.from( Array(this.matrix.length).keys() );
+        Random.shuffle( indices ).forEach( this.addRandomChips, this );
 
-        if ( this.totalChipsCount == 0 ) {
-            this.addChips( randomIndices[0] );
+        // if all bets were skipped due to 'emptyBetFrequency'
+        if ( this.layout.totalChipsCount == 0 ) {
+            this.addChips( indices[0] );
         }
     }
 
@@ -89,9 +91,8 @@ class Payout extends Game {
             return;
         }
 
-        if ( this.totalStacksCount < this.maxStacks ) {
+        if ( this.layout.totalStacksCount < this.maxStacks ) {
             this.addChips( randomIndex );
-            this.totalStacksCount++;
         }
     }
 
@@ -113,7 +114,7 @@ class Payout extends Game {
         }
 
 
-        let totalCountDiff = this.maxTotal - this.totalChipsCount - count;
+        let totalCountDiff = this.maxTotal - this.layout.totalChipsCount - count;
 
         if ( totalCountDiff < 0 ) {
             count += totalCountDiff;
@@ -122,9 +123,7 @@ class Payout extends Game {
 
         if ( count > 0 ) {
             let coords = this.matrix[index];
-            this.layout.addChip( coords, count );
-            this.payout += count * this.layout.bets.getMultiplier( coords );
-            this.totalChipsCount += count;
+            this.layout.addStack( coords, count );
         }
     }
 }

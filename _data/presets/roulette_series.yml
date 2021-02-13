@@ -1,0 +1,21 @@
+ungrouped:
+    - label: Easy
+      value: easy
+
+    - label: Medium
+      value: medium
+
+    - label: Hard
+      value: hard
+
+groups:
+    Thousands, step 100:
+        - label: 1st thousand
+          value: thousand1
+          selected: selected
+
+        - label: 2nd thousand
+          value: thousand2
+
+        - label: 3rd thousand
+          value: thousand3

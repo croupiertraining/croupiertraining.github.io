@@ -8,7 +8,7 @@ class BlackJack extends Game {
             iconsPosition: 'top',
             minBet: 10,
             maxBet: 100,
-            step: 10,
+            step: 5,
             current: {
                 money: null,
                 payout: null

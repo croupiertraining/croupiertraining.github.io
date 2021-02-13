@@ -1,6 +1,16 @@
 <div>
+{% include controls/preset.html game="roulette_payout" id="settings-payout-preset" %}
+
+    <label for="settings-payout-mode">Mode:</label>
+    <div class="toggle-buttons">
+    <div class="toggle-buttons-container">
+        {% include controls/radiobutton.html name="settings-payout-mode" value="random" label="random" checked="checked" %}
+        {% include controls/radiobutton.html name="settings-payout-mode" value="picture_bets" label="picture bets" %}
+    </div>
+    </div>
+
 {% include controls/togglegroup.html game="payout" setting="winningNumbers" label="Winning numbers" %}
-{% include controls/togglegroup.html game="payout" setting="winningBets" label="Winning bets" %}
+{% include controls/togglegroup.html game="payout" setting="winningBets" label="Winning bets" toggle_all=true %}
 
 {% include controls/slider.html game="payout" setting="emptyBetFrequency"
     label="Empty bet frequency"

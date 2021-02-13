@@ -1,0 +1,140 @@
+{
+    "blackjack_payout": {
+        "easy": {
+            "minBet": 20,
+            "maxBet": 100,
+            "step": 20
+        },
+        "medium": {
+            "minBet": 10,
+            "maxBet": 100,
+            "step": 5
+        },
+        "hard": {
+            "minBet": 10,
+            "maxBet": 300,
+            "step": 5
+        },
+        "hundred1": {
+            "minBet": 10,
+            "maxBet": 100,
+            "step": 5
+        },
+        "hundred2": {
+            "minBet": 100,
+            "maxBet": 200,
+            "step": 5
+        },
+        "hundred3": {
+            "minBet": 200,
+            "maxBet": 300,
+            "step": 5
+        }
+    },
+    "roulette_series": {
+        "easy": {
+            "minBet": 50,
+            "maxBet": 100,
+            "step": 10
+        },
+        "medium": {
+            "minBet": 50,
+            "maxBet": 1000,
+            "step": 25
+        },
+        "hard": {
+            "minBet": null,
+            "maxBet": 3000,
+            "step": 5
+        },
+        "thousand1": {
+            "minBet": 100,
+            "maxBet": 1000,
+            "step": 100
+        },
+        "thousand2": {
+            "minBet": 1000,
+            "maxBet": 2000,
+            "step": 100
+        },
+        "thousand3": {
+            "minBet": 2000,
+            "maxBet": 3000,
+            "step": 100
+        }
+    },
+    "roulette_payout": {
+        "easy": {
+            "emptyBetFrequency": 0.4,
+            "moreThanOneFrequency": 0.3,
+            "maxStacks": 3,
+            "minPerStack": 1,
+            "maxPerStack": 1,
+            "maxTotal": 3
+        },
+        "medium": {
+            "emptyBetFrequency": 0.4,
+            "moreThanOneFrequency": 0.3,
+            "maxStacks": 6,
+            "minPerStack": 1,
+            "maxPerStack": 5,
+            "maxTotal": 30
+        },
+        "hard": {
+            "emptyBetFrequency": 0.2,
+            "moreThanOneFrequency": 0.7,
+            "maxStacks": 12,
+            "minPerStack": 1,
+            "maxPerStack": 20,
+            "maxTotal": 240
+        },
+        "rudiment1": {
+            "emptyBetFrequency": 0,
+            "moreThanOneFrequency": 0.3,
+            "maxStacks": 1,
+            "minPerStack": 1,
+            "maxPerStack": 1,
+            "maxTotal": 1
+        },
+        "rudiment2": {
+            "emptyBetFrequency": 0,
+            "moreThanOneFrequency": 0.7,
+            "maxStacks": 1,
+            "minPerStack": 1,
+            "maxPerStack": 10,
+            "maxTotal": 10
+        },
+        "rudiment3": {
+            "emptyBetFrequency": 0,
+            "moreThanOneFrequency": 0.7,
+            "maxStacks": 1,
+            "minPerStack": 10,
+            "maxPerStack": 20,
+            "maxTotal": 20
+        },
+        "rudiment4": {
+            "emptyBetFrequency": 0,
+            "moreThanOneFrequency": 0.5,
+            "maxStacks": 2,
+            "minPerStack": 1,
+            "maxPerStack": 15,
+            "maxTotal": 30
+        },
+        "rudiment5": {
+            "emptyBetFrequency": 0,
+            "moreThanOneFrequency": 0.5,
+            "maxStacks": 3,
+            "minPerStack": 1,
+            "maxPerStack": 10,
+            "maxTotal": 30
+        },
+        "flat": {
+            "emptyBetFrequency": 0.4,
+            "moreThanOneFrequency": 0,
+            "maxStacks": 12,
+            "minPerStack": 1,
+            "maxPerStack": 1,
+            "maxTotal": 12
+        }
+    }
+}

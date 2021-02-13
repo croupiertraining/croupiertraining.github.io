@@ -1,16 +1,18 @@
 <div>
+{% include controls/preset.html game="blackjack_payout" id="settings-bj-preset" %}
+
 {% include controls/slider.html game="bj" setting="minBet"
-    label="Min bet" preview="10"
+    label="Min bet" preview=true
     left="10" right="300"
     min="10" max="300" step="10" %}
 
 {% include controls/slider.html game="bj" setting="maxBet"
-    label="Max bet" preview="100"
+    label="Max bet" preview=true
     left="10" right="300"
     min="10" max="300" step="10" %}
 
 {% include controls/slider.html game="bj" setting="step"
-    label="Step" preview="10"
+    label="Step" preview=true
     left="5" right="100"
     min="5" max="100" step="5" %}
 </div>
