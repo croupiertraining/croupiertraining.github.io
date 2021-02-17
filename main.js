@@ -333,6 +333,17 @@ function attachKeyboardShortcuts() {
                 case "k":
                     modals.show("Shortcuts");
                     break;
+                case "n":
+                    let numpadGrid = $('numpad');
+
+                    if ( numpadGrid.classList.contains('invisible') ) {
+                        numpadGrid.classList.remove('invisible');
+                    }
+                    else {
+                        numpadGrid.classList.add('invisible');
+                    }
+
+                    break;
                 case "c":
                     gamePane.switchPane("roulette_series");
                     break;

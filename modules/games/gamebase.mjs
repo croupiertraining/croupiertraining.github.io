@@ -53,13 +53,6 @@ class Game {
 
     onPaneShow() {
         this.ctx.numpad.target.placeholder = this.answerPlaceholder;
-
-        if ( this.iconsPosition == 'top' ) {
-            this.$('icons').classList.add('top');
-        }
-        else {
-            this.$('icons').classList.remove('top');
-        }
     }
 
     checkAnswer() {

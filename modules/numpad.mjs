@@ -58,7 +58,12 @@ class Numpad {
     }
 
     append( digit ) {
-        this.target.append( digit );
+        if ( digit.indexOf('.') >= 0 && this.target.value.indexOf('.') >= 0 ) {
+            // '.' already appended, do nothing
+        }
+        else {
+            this.target.append( digit );
+        }
     }
 
     increment( inc = 1 ) {

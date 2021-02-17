@@ -5,7 +5,6 @@ class BlackJack extends Game {
         super({
             paneName: 'bjframe',
             settingsPaneName: 'SettingsBJ',
-            iconsPosition: 'top',
             minBet: 10,
             maxBet: 100,
             step: 5,

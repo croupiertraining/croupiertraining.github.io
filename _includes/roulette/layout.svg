@@ -1,9 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 5 125 101" preserveAspectRatio="xMidYMid slice">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="4 5 115 101" preserveAspectRatio="xMidYMid slice">
     <defs>
-        <radialGradient id="tableGradient">
-            <stop offset="0%" stop-color="#090"/>
-            <stop offset="100%" stop-color="#040"/>
-        </radialGradient>
         <radialGradient id="chipGradient">
             <stop offset="0%" stop-color="yellow"/>
             <stop offset="60%" stop-color="yellow"/>
@@ -50,7 +46,6 @@
         </radialGradient>
     </defs>
 
-    <rect fill="url(#tableGradient)" width="100%" height="100%" />
     <g>
         <g>
             <rect x="30"  y="12" stroke="white" fill="#b00" width="25" height="31" id="number3frame" />

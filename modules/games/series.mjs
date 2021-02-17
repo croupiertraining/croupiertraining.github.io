@@ -7,7 +7,6 @@ class Series extends Game {
         super({
             paneName: 'seriesframe',
             settingsPaneName: 'SettingsSeries',
-            iconsPosition: 'top',
             answerPlaceholder: 'Bet',
             selectedSeries: ["tier", "orphelins", "vousins du zero", "0-spiel"],
             seriesBet: {

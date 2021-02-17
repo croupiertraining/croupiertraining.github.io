@@ -6,9 +6,11 @@ layout:
 
 {% include head.html %}
 
-<body>
+<body ontouchstart="">
 <div class="container">
 <div class="mainview">
+    {% include icons.html %}
+
     {% include modal.html modalName="Menu" src="menu.html" %}
     {% include modal.html modalName="About" src="modals/about.html" %}
     {% include modal.html modalName="Shortcuts" src="modals/shortcuts.html" %}
@@ -27,7 +29,6 @@ layout:
     </div>
 
     {% include controls.html %}
-    {% include icons.html %}
 </div>
 </div>
 </body>
